@@ -25,7 +25,7 @@
 
         /* ----- HEADER ----- */
         header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-        .header-bg { position: absolute; inset: 0 0 auto 0; height: 115px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%); z-index: 0; pointer-events: none; }
+        .header-bg { position: absolute; inset: 0 0 auto 0; height: 160px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0) 100%); z-index: 0; pointer-events: none; }
         .gradient-blur { position: absolute; z-index: -1; inset: 0 0 auto 0; height: 160px; pointer-events: none; }
         .gradient-blur > div, .gradient-blur::before, .gradient-blur::after { position: absolute; inset: 0; }
         .gradient-blur::before { content: ""; z-index: 1; backdrop-filter: blur(0.5px); -webkit-backdrop-filter: blur(0.5px); mask: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 12.5%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 37.5%); -webkit-mask: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 12.5%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 37.5%); }
@@ -43,49 +43,124 @@
         /* ----- LAYOUT ----- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .news-grid { display: grid; grid-template-columns: 2.5fr 1fr; gap: 50px; } 
+        .article-category { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 10px; display: block; }
         .featured-article h2 { font-family: 'Times New Roman', Times, serif; font-size: 3rem; margin: 0 0 15px 0; line-height: 1.1; }
         .featured-article p { font-size: 1.2rem; color: #333; margin: 0; }
         .side-news { border-left: 1px solid var(--border-color); padding-left: 40px; }
-        footer { text-align: center; padding: 40px; margin-top: 60px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: #999; }
+        
+        .view-section { padding-bottom: 130px; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ----- CARTÃO DE NOTÍCIA ----- */
-        .news-card {
-            display: block; width: 100%; margin-bottom: 40px; background: #ffffff; border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color);
-            overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .news-card { display: block; width: 100%; margin-bottom: 40px; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color); overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .news-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
-        .news-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
-        .news-card-text { padding: 15px 20px; font-family: 'Times New Roman', Times, serif; font-size: 1.15rem; line-height: 1.3; color: var(--text-color); font-weight: bold; }
-        .news-card-date { display: block; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.75rem; color: #888; font-weight: 500; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* ----- COMPONENTE PÍLULA ----- */
+        .news-card img { width: 100%; height: 180px; object-fit: cover; display: block; border-bottom: 1px solid var(--border-color); }
+        .news-card-text { padding: 20px 20px; font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; line-height: 1.2; color: var(--text-color); font-weight: bold; }
+        .news-card-date { display: block; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.8rem; color: #888; font-weight: 600; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .pill-notice { display: flex; justify-content: center; align-items: center; background-color: #fafafa; border: 1px solid var(--border-color); border-radius: 50px; padding: 15px 25px; color: #666; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-align: center; margin-top: 30px; cursor: default; }
 
-        /* ----- OVERLAY (PÁGINA DE NOTÍCIA) ----- */
+        /* ----- OVERLAY DE NOTÍCIA ----- */
         .article-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 2000; overflow-y: auto; overflow-x: hidden; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
         .article-overlay.active { opacity: 1; visibility: visible; }
         
         .overlay-content { 
-            max-width: 800px; margin: 0 auto; padding: 40px 20px; 
-            opacity: 0; transform: translateY(40px); filter: blur(12px); -webkit-filter: blur(12px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), -webkit-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            transition-delay: 0.1s; 
+            max-width: 800px; margin: 0 auto; padding: 80px 20px 40px; 
+            opacity: 0; transform: translateY(40px); filter: blur(12px); -webkit-filter: blur(12px); 
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), -webkit-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s; 
         }
         .article-overlay.active .overlay-content { opacity: 1; transform: translateY(0); filter: blur(0); -webkit-filter: blur(0); }
-
-        .btn-voltar { background-color: #333333; border: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 30px; transition: transform 0.2s ease, background-color 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-voltar:hover { transform: scale(1.05); background-color: #111111; }
+        
+        /* BOTÃO DE VOLTAR FIXO COM DESFOQUE */
+        .btn-voltar { 
+            position: fixed; top: 20px; left: 20px; z-index: 3000; 
+            background-color: rgba(28, 28, 30, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); width: 44px; height: 44px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; 
+            transition: transform 0.2s ease, background-color 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+        .btn-voltar:hover { transform: scale(1.05); background-color: rgba(28, 28, 30, 0.8); }
         .btn-voltar svg { width: 20px; height: 20px; stroke: #ffffff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; margin-right: 2px; }
-
+        
         .overlay-img { width: 100%; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color); }
         .overlay-title { font-family: 'Times New Roman', Times, serif; font-size: 3rem; margin: 0 0 20px 0; line-height: 1.1; }
         .overlay-text p { font-size: 1.15rem; color: #333; margin-bottom: 20px; }
+
+        /* ----- PÁGINA DE PESQUISA ----- */
+        #search-view { display: none; } 
+        
+        /* ----- BARRA DE NAVEGAÇÃO INFERIOR (PÍLULA) ----- */
+        .bottom-nav-wrapper { position: fixed; bottom: 15px; left: 20px; z-index: 1500; transition: opacity 0.3s ease, transform 0.3s ease; }
+        .bottom-nav-wrapper.hide { opacity: 0; transform: translateY(20px); pointer-events: none; }
+        .bottom-nav { display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(28, 28, 30, 0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50px; padding: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        .nav-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 24px; border-radius: 40px; border: none; background: transparent; cursor: pointer; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; font-weight: 600; color: #dddddd; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2.2; fill: none; }
+        .nav-btn.active { background: #d1d1d6; color: #111111; }
+
+        /* ----- TELA DE PESQUISA (OVERLAY DESFOCADO) ----- */
+        .search-overlay-view {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            z-index: 3000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex; flex-direction: column;
+        }
+        .search-overlay-view.active { opacity: 1; visibility: visible; }
+
+        /* CONTAINER DOS RESULTADOS DA PESQUISA (Aparece em cima da barra) */
+        .search-results-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 130px; 
+            padding: 40px 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        /* ===== ESTILO DO NOVO ITEM DE PESQUISA (SÓ TEXTO) ===== */
+        .search-result-item {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15); /* Linha separadora horizontal em cima */
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #111111;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            animation: slideUp 0.3s ease forwards;
+        }
+
+        /* Faz a linha sumir suavemente quando passa o mouse/dedo para indicar clique */
+        .search-result-item:hover {
+            opacity: 0.6;
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .search-bottom-container { position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+
+        .btn-close-search { width: 40px; height: 40px; border-radius: 50%; background: #e5e5ea; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: background 0.2s; align-self: flex-end; }
+        .btn-close-search:hover { background: #d1d1d6; }
+        .btn-close-search svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        .search-input-wrapper { position: relative; width: 100%; max-width: 800px; background: #ffffff; border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .search-input { width: 100%; padding: 18px 60px 18px 55px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.1rem; border: 1px solid var(--border-color); border-radius: 40px; background: transparent; outline: none; color: #111; }
+        .search-input::placeholder { color: #999; font-weight: 500; }
+        .search-icon-left { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #888; width: 20px; height: 20px; pointer-events: none; }
+
+        .search-submit-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%) scale(0.8); width: 36px; height: 36px; border-radius: 50%; background: #007aff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #ffffff; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+        .search-submit-btn.show { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
+        .search-submit-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
         @media (max-width: 800px) {
             .news-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
             .side-news { border-left: none; padding-left: 0; border-top: 1px solid var(--border-color); padding-top: 30px; }
             .overlay-title { font-size: 2.2rem; }
+            .nav-btn { padding: 8px 18px; }
+            .search-bottom-container { bottom: 15px; left: 15px; right: 15px; }
+            .search-results-container { bottom: 120px; }
+            .search-result-item { font-size: 1.2rem; padding: 15px 10px; }
         }
     </style>
 </head>
@@ -101,7 +176,7 @@
         </div>
     </header>
 
-    <div class="container">
+    <div class="container view-section" id="news-view">
         <main class="news-grid">
             <section class="featured-article">
                 <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #888; margin-bottom: 10px; display: block;">Portal</span>
@@ -109,13 +184,20 @@
                 <p>O seu espaço dedicado às novidades e à tecnologia que simplifica a vida moderna.</p>
             </section>
 
-            <aside class="side-news">
+            <aside class="side-news" id="listaNoticiasPrincipal">
+                <div class="news-card" onclick="abrirArtigo('paginaPlayerNotificacao')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/683789131_1499934271805955_9163241896628485372_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=rYclc9dR4p8Q7kNvwFCM_uP&_nc_oc=AdpyTiYusmwSNXK1O7miBUCL0e980h4rPJU8Rk4OFOBGgnS5cLfOOSu1Vyr4mwHsKSI&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QHNdSzPLlpEhrUC9dw3DnhKuzKNLYvKLZ3ttCiHQXq6Aw&oe=6A1F6D51" alt="Novo player de notificações">
+                    <div class="news-card-text">
+                        One UI 9.0 vaza com novo player de música na área de notificações
+                        <span class="news-card-date">4 de Maio, 23:50</span>
+                    </div>
+                </div>
                 
                 <div class="news-card" onclick="abrirArtigo('paginaControle')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/684149357_967334385890788_5321776713522382321_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=S82SZcC1_owQ7kNvwEfQzzi&_nc_oc=Ado0f8SVHi0ISXYeMf2Xyzk7bHXJn3r88ESJsVniyTPf29XI27nu5-k0Gxe8Y0LiNg4&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QFmpQBSH1UmtukGHEVBuhJrPXk7EP8gXb_2YCMTUqJ8zg&oe=6A1F277B" alt="Central de Controle One UI 9">
                     <div class="news-card-text">
                         One UI 9 pode permitir remover botão do modo escuro na central de controle
-                        <span class="news-card-date">Hoje, 16:03</span>
+                        <span class="news-card-date">4 de Maio, 16:03</span>
                     </div>
                 </div>
 
@@ -126,19 +208,71 @@
                         <span class="news-card-date">3 de Maio, 15:30</span>
                     </div>
                 </div>
-
-                <div class="pill-notice">Fique ligado para mais atualizações.</div>
             </aside>
         </main>
     </div>
 
-    <footer>&copy; 2026 Sam New. Focado em inovação Samsung.</footer>
+
+    <div class="search-overlay-view" id="searchOverlay">
+        
+        <div class="search-results-container" id="searchResultsArea"></div>
+
+        <div class="search-bottom-container">
+            <button class="btn-close-search" onclick="fecharPesquisa()" aria-label="Fechar Pesquisa">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <div class="search-input-wrapper">
+                <svg class="search-icon-left" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                
+                <input type="text" class="search-input" id="searchInput" placeholder="O que você procura?" oninput="realizarPesquisa()">
+                
+                <button class="search-submit-btn" id="searchSubmitBtn" aria-label="Pesquisar">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bottom-nav-wrapper" id="navPill">
+        <div class="bottom-nav">
+            <button class="nav-btn active" aria-label="Notícias">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Notícias
+            </button>
+            <button class="nav-btn" onclick="abrirPesquisa()" aria-label="Pesquisar">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Pesquisa
+            </button>
+        </div>
+    </div>
+
+
+    <div class="article-overlay" id="paginaPlayerNotificacao">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaPlayerNotificacao')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/683789131_1499934271805955_9163241896628485372_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=rYclc9dR4p8Q7kNvwFCM_uP&_nc_oc=AdpyTiYusmwSNXK1O7miBUCL0e980h4rPJU8Rk4OFOBGgnS5cLfOOSu1Vyr4mwHsKSI&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QHNdSzPLlpEhrUC9dw3DnhKuzKNLYvKLZ3ttCiHQXq6Aw&oe=6A1F6D51" class="overlay-img">
+            <h1 class="overlay-title">One UI 9.0 vaza com novo player de música na área de notificações</h1>
+            <div class="overlay-text">
+                <p>Novos vazamentos da One UI 9.0 revelam mudanças importantes no player de música exibido na área de notificações dos dispositivos Galaxy.</p>
+                <p>O novo visual aposta em um design mais moderno e imersivo, com capa do álbum em destaque, efeito de fundo desfocado e barra de progresso com animações dinâmicas, que reagem à música em reprodução.</p>
+                <p>Além disso, o player apresenta botões mais arredondados e organizados, mantendo o foco na simplicidade e facilidade de uso.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="article-overlay" id="paginaControle">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaControle')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
         <div class="overlay-content">
-            <button class="btn-voltar" onclick="fecharArtigo('paginaControle')" aria-label="Voltar">
-                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/684149357_967334385890788_5321776713522382321_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=S82SZcC1_owQ7kNvwEfQzzi&_nc_oc=Ado0f8SVHi0ISXYeMf2Xyzk7bHXJn3r88ESJsVniyTPf29XI27nu5-k0Gxe8Y0LiNg4&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QFmpQBSH1UmtukGHEVBuhJrPXk7EP8gXb_2YCMTUqJ8zg&oe=6A1F277B" class="overlay-img">
             <h1 class="overlay-title">One UI 9 pode permitir remover botão do modo escuro na central de controle</h1>
             <div class="overlay-text">
@@ -150,10 +284,11 @@
     </div>
 
     <div class="article-overlay" id="paginaPlayer">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaPlayer')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
         <div class="overlay-content">
-            <button class="btn-voltar" onclick="fecharArtigo('paginaPlayer')" aria-label="Voltar">
-                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/684485022_1652305236096240_561553661199524404_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=BlxMcopH9IEQ7kNvwEYPJXe&_nc_oc=AdqQ_Sk-c0DRE5XuOjFWmrTXRjxakD_N67UXoNm_ITLBzrESaEuvxgpWZgfUccDV--k&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QG6wXLxxyKyZdoSRpLQB-xahDEojuxHBB7Ue_bkbhDcyA&oe=6A1F1026" class="overlay-img">
             <h1 class="overlay-title">Vazamento da One UI 9.0 revela novo player de música</h1>
             <div class="overlay-text">
@@ -163,14 +298,102 @@
     </div>
 
     <script>
+        // LÓGICA DE ABRIR/FECHAR MATÉRIAS
         function abrirArtigo(id) {
             document.getElementById(id).classList.add('active');
             document.body.style.overflow = 'hidden';
+            document.getElementById('navPill').classList.add('hide'); 
             window.scrollTo(0, 0);
         }
+
         function fecharArtigo(id) {
             document.getElementById(id).classList.remove('active');
             document.body.style.overflow = 'auto';
+            document.getElementById('navPill').classList.remove('hide'); 
+        }
+
+        // LÓGICA DA TELA DE PESQUISA
+        function abrirPesquisa() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('navPill').classList.add('hide');
+            setTimeout(() => document.getElementById('searchInput').focus(), 100);
+        }
+
+        function fecharPesquisa() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('navPill').classList.remove('hide');
+            
+            // Reseta a pesquisa
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchSubmitBtn').classList.remove('show');
+            document.getElementById('searchResultsArea').innerHTML = ''; 
+        }
+
+        // LÓGICA DE PESQUISA AO VIVO (APENAS TEXTO COM LINHA)
+        function realizarPesquisa() {
+            const inputElement = document.getElementById('searchInput');
+            const query = inputElement.value.toLowerCase().trim();
+            const btn = document.getElementById('searchSubmitBtn');
+            const resultsContainer = document.getElementById('searchResultsArea');
+            
+            // Controle do botão da seta
+            if (query.length > 0) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+
+            // Limpa os resultados anteriores
+            resultsContainer.innerHTML = '';
+
+            // Se o input estiver vazio, não faz nada
+            if (query === '') return;
+
+            const cardsPrincipais = document.querySelectorAll('#listaNoticiasPrincipal .news-card');
+            let encontrouAlgo = false;
+
+            cardsPrincipais.forEach(card => {
+                // Pega a caixa de texto do card
+                const textContainer = card.querySelector('.news-card-text').cloneNode(true);
+                
+                // Remove a data para pegar SÓ o título
+                const dateElement = textContainer.querySelector('.news-card-date');
+                if (dateElement) dateElement.remove();
+                
+                const tituloLimpo = textContainer.textContent.trim();
+                
+                // Verifica se a pesquisa bate com o título
+                if (tituloLimpo.toLowerCase().includes(query)) {
+                    encontrouAlgo = true;
+                    
+                    // Pega o ID da notícia para o clique funcionar
+                    const idNoticia = card.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    
+                    // Cria o novo item de resultado minimalista (só texto)
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.setAttribute('onclick', `abrirDaPesquisa('${idNoticia}')`);
+                    resultItem.innerText = tituloLimpo;
+                    
+                    resultsContainer.appendChild(resultItem);
+                }
+            });
+
+            // Mostra mensagem se não encontrar
+            if (!encontrouAlgo) {
+                resultsContainer.innerHTML = '<div class="pill-notice">Nenhum resultado encontrado. Tente outros termos.</div>';
+            }
+        }
+
+        // Função auxiliar que fecha a pesquisa e abre a matéria com transição
+        function abrirDaPesquisa(idNoticia) {
+            fecharPesquisa();
+            // Dá um leve atraso para a animação de fechar a busca não engasgar com a de abrir a notícia
+            setTimeout(() => {
+                abrirArtigo(idNoticia);
+            }, 300);
         }
     </script>
 </body>
