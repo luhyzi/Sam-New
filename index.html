@@ -105,7 +105,7 @@
         }
         .search-overlay-view.active { opacity: 1; visibility: visible; }
 
-        /* CONTAINER DOS RESULTADOS DA PESQUISA (Aparece em cima da barra) */
+        /* CONTAINER DOS RESULTADOS DA PESQUISA */
         .search-results-container {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 130px; 
@@ -116,12 +116,12 @@
             align-items: center; 
         }
 
-        /* ===== ESTILO DO NOVO ITEM DE PESQUISA (SÓ TEXTO) ===== */
+        /* ===== ESTILO DO ITEM DE PESQUISA (SÓ TEXTO) ===== */
         .search-result-item {
             width: 100%;
             max-width: 800px;
             padding: 20px 10px;
-            border-top: 1px solid rgba(0, 0, 0, 0.15); /* Linha separadora horizontal em cima */
+            border-top: 1px solid rgba(0, 0, 0, 0.15); 
             cursor: pointer;
             font-family: 'Times New Roman', Times, serif;
             font-size: 1.4rem;
@@ -131,7 +131,6 @@
             animation: slideUp 0.3s ease forwards;
         }
 
-        /* Faz a linha sumir suavemente quando passa o mouse/dedo para indicar clique */
         .search-result-item:hover {
             opacity: 0.6;
         }
@@ -185,6 +184,15 @@
             </section>
 
             <aside class="side-news" id="listaNoticiasPrincipal">
+                
+                <div class="news-card" onclick="abrirArtigo('paginaRelogio')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687958985_1679969066355501_3143807549746778862_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2P7VHoPomKYQ7kNvwFjnvcH&_nc_oc=AdrTLJ2nRElHmn4ipj0OAOZbiwwcV7pVR6DlPN5VHVamxi_GuaF0llE_5-GfbtEPpq8&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QEJ7eeMPjNMSYWxFu7wZPr5wd1ZWW9tEPy6llxPBWm5kQ&oe=6A1F7ABD" alt="Novo relógio adaptativo">
+                    <div class="news-card-text">
+                        One UI 9.0 vaza com novo relógio adaptativo mais inteligente
+                        <span class="news-card-date">4 de Maio, 01:10</span>
+                    </div>
+                </div>
+
                 <div class="news-card" onclick="abrirArtigo('paginaPlayerNotificacao')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/683789131_1499934271805955_9163241896628485372_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=rYclc9dR4p8Q7kNvwFCM_uP&_nc_oc=AdpyTiYusmwSNXK1O7miBUCL0e980h4rPJU8Rk4OFOBGgnS5cLfOOSu1Vyr4mwHsKSI&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QHNdSzPLlpEhrUC9dw3DnhKuzKNLYvKLZ3ttCiHQXq6Aw&oe=6A1F6D51" alt="Novo player de notificações">
                     <div class="news-card-text">
@@ -250,6 +258,21 @@
         </div>
     </div>
 
+
+    <div class="article-overlay" id="paginaRelogio">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaRelogio')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687958985_1679969066355501_3143807549746778862_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2P7VHoPomKYQ7kNvwFjnvcH&_nc_oc=AdrTLJ2nRElHmn4ipj0OAOZbiwwcV7pVR6DlPN5VHVamxi_GuaF0llE_5-GfbtEPpq8&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QEJ7eeMPjNMSYWxFu7wZPr5wd1ZWW9tEPy6llxPBWm5kQ&oe=6A1F7ABD" class="overlay-img">
+            <h1 class="overlay-title">One UI 9.0 vaza com novo relógio adaptativo mais inteligente</h1>
+            <div class="overlay-text">
+                <p>Novos vazamentos da One UI 9.0 mostram que a Samsung está evoluindo o recurso de relógio adaptativo na tela de bloqueio, trazendo mais personalização e integração com o papel de parede.</p>
+                <p>Na imagem, é possível ver um relógio que se ajusta automaticamente ao fundo, mudando estilo, posição e até o formato dos números para se adaptar melhor à imagem.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="article-overlay" id="paginaPlayerNotificacao">
         <button class="btn-voltar" onclick="fecharArtigo('paginaPlayerNotificacao')" aria-label="Voltar">
@@ -325,53 +348,42 @@
             document.body.style.overflow = 'auto';
             document.getElementById('navPill').classList.remove('hide');
             
-            // Reseta a pesquisa
             document.getElementById('searchInput').value = '';
             document.getElementById('searchSubmitBtn').classList.remove('show');
             document.getElementById('searchResultsArea').innerHTML = ''; 
         }
 
-        // LÓGICA DE PESQUISA AO VIVO (APENAS TEXTO COM LINHA)
+        // LÓGICA DE PESQUISA AO VIVO
         function realizarPesquisa() {
             const inputElement = document.getElementById('searchInput');
             const query = inputElement.value.toLowerCase().trim();
             const btn = document.getElementById('searchSubmitBtn');
             const resultsContainer = document.getElementById('searchResultsArea');
             
-            // Controle do botão da seta
             if (query.length > 0) {
                 btn.classList.add('show');
             } else {
                 btn.classList.remove('show');
             }
 
-            // Limpa os resultados anteriores
             resultsContainer.innerHTML = '';
 
-            // Se o input estiver vazio, não faz nada
             if (query === '') return;
 
             const cardsPrincipais = document.querySelectorAll('#listaNoticiasPrincipal .news-card');
             let encontrouAlgo = false;
 
             cardsPrincipais.forEach(card => {
-                // Pega a caixa de texto do card
                 const textContainer = card.querySelector('.news-card-text').cloneNode(true);
-                
-                // Remove a data para pegar SÓ o título
                 const dateElement = textContainer.querySelector('.news-card-date');
                 if (dateElement) dateElement.remove();
                 
                 const tituloLimpo = textContainer.textContent.trim();
                 
-                // Verifica se a pesquisa bate com o título
                 if (tituloLimpo.toLowerCase().includes(query)) {
                     encontrouAlgo = true;
-                    
-                    // Pega o ID da notícia para o clique funcionar
                     const idNoticia = card.getAttribute('onclick').match(/'([^']+)'/)[1];
                     
-                    // Cria o novo item de resultado minimalista (só texto)
                     const resultItem = document.createElement('div');
                     resultItem.className = 'search-result-item';
                     resultItem.setAttribute('onclick', `abrirDaPesquisa('${idNoticia}')`);
@@ -381,16 +393,13 @@
                 }
             });
 
-            // Mostra mensagem se não encontrar
             if (!encontrouAlgo) {
                 resultsContainer.innerHTML = '<div class="pill-notice">Nenhum resultado encontrado. Tente outros termos.</div>';
             }
         }
 
-        // Função auxiliar que fecha a pesquisa e abre a matéria com transição
         function abrirDaPesquisa(idNoticia) {
             fecharPesquisa();
-            // Dá um leve atraso para a animação de fechar a busca não engasgar com a de abrir a notícia
             setTimeout(() => {
                 abrirArtigo(idNoticia);
             }, 300);
