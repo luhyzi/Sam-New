@@ -185,6 +185,14 @@
 
             <aside class="side-news" id="listaNoticiasPrincipal">
                 
+                <div class="news-card" onclick="abrirArtigo('paginaGalaxyA15A16')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/680696164_2030216201246607_2806909388885780373_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wYhj331zyb8Q7kNvwEj3awP&_nc_oc=AdoEeiONC6K2CHa3xv0gMvaO1SpSJ1bMgk5Rtst1G1re2NMo1uaIlo0LXN9Aon7wJuA&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFRqQvrL5Fk4ft8vbwX8EwH856Q98Hvw0HnyH4mCA9Rog&oe=6A2179BA" alt="Galaxy A15 e A16 One UI 8.5">
+                    <div class="news-card-text">
+                        Galaxy A15 5G e A16 5G aparecem em testes com One UI 8.5 nos servidores da Samsung
+                        <span class="news-card-date">5 de Maio, 13:40</span>
+                    </div>
+                </div>
+
                 <div class="news-card" onclick="abrirArtigo('paginaRelogio')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687958985_1679969066355501_3143807549746778862_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2P7VHoPomKYQ7kNvwFjnvcH&_nc_oc=AdrTLJ2nRElHmn4ipj0OAOZbiwwcV7pVR6DlPN5VHVamxi_GuaF0llE_5-GfbtEPpq8&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QEJ7eeMPjNMSYWxFu7wZPr5wd1ZWW9tEPy6llxPBWm5kQ&oe=6A1F7ABD" alt="Novo relógio adaptativo">
                     <div class="news-card-text">
@@ -258,6 +266,21 @@
         </div>
     </div>
 
+
+    <div class="article-overlay" id="paginaGalaxyA15A16">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaGalaxyA15A16')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/680696164_2030216201246607_2806909388885780373_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wYhj331zyb8Q7kNvwEj3awP&_nc_oc=AdoEeiONC6K2CHa3xv0gMvaO1SpSJ1bMgk5Rtst1G1re2NMo1uaIlo0LXN9Aon7wJuA&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFRqQvrL5Fk4ft8vbwX8EwH856Q98Hvw0HnyH4mCA9Rog&oe=6A2179BA" class="overlay-img">
+            <h1 class="overlay-title">Galaxy A15 5G e A16 5G aparecem em testes com One UI 8.5 nos servidores da Samsung</h1>
+            <div class="overlay-text">
+                <p>Novos vazamentos indicam que a Samsung já começou os testes da One UI 8.5 em modelos mais acessíveis da linha Galaxy, incluindo o Galaxy A15 5G e o Galaxy A16 5G.</p>
+                <p>Os dispositivos foram identificados em servidores internos da Samsung, o que confirma que a empresa está preparando a atualização para esses aparelhos.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="article-overlay" id="paginaRelogio">
         <button class="btn-voltar" onclick="fecharArtigo('paginaRelogio')" aria-label="Voltar">
@@ -353,7 +376,7 @@
             document.getElementById('searchResultsArea').innerHTML = ''; 
         }
 
-        // LÓGICA DE PESQUISA AO VIVO
+        // LÓGICA DE PESQUISA AO VIVO (APENAS TEXTO COM LINHA)
         function realizarPesquisa() {
             const inputElement = document.getElementById('searchInput');
             const query = inputElement.value.toLowerCase().trim();
@@ -375,6 +398,7 @@
 
             cardsPrincipais.forEach(card => {
                 const textContainer = card.querySelector('.news-card-text').cloneNode(true);
+                
                 const dateElement = textContainer.querySelector('.news-card-date');
                 if (dateElement) dateElement.remove();
                 
@@ -382,6 +406,7 @@
                 
                 if (tituloLimpo.toLowerCase().includes(query)) {
                     encontrouAlgo = true;
+                    
                     const idNoticia = card.getAttribute('onclick').match(/'([^']+)'/)[1];
                     
                     const resultItem = document.createElement('div');
