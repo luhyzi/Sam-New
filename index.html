@@ -83,6 +83,7 @@
         
         .overlay-img { width: 100%; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color); }
         .overlay-title { font-family: 'Times New Roman', Times, serif; font-size: 3rem; margin: 0 0 20px 0; line-height: 1.1; }
+        .overlay-subtitle { font-family: 'Times New Roman', Times, serif; font-size: 2.2rem; margin: 40px 0 15px 0; line-height: 1.1; }
         .overlay-text p { font-size: 1.15rem; color: #333; margin-bottom: 20px; }
 
         /* ----- PÁGINA DE PESQUISA ----- */
@@ -156,6 +157,7 @@
             .news-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
             .side-news { border-left: none; padding-left: 0; border-top: 1px solid var(--border-color); padding-top: 30px; }
             .overlay-title { font-size: 2.2rem; }
+            .overlay-subtitle { font-size: 1.8rem; }
             .nav-btn { padding: 8px 18px; }
             .search-bottom-container { bottom: 15px; left: 15px; right: 15px; }
             .search-results-container { bottom: 120px; }
@@ -185,6 +187,14 @@
 
             <aside class="side-news" id="listaNoticiasPrincipal">
                 
+                <div class="news-card" onclick="abrirArtigo('paginaS25Ultra')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/688132210_1684471755887904_331294413087139745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Fxd3dr2Mtr0Q7kNvwHBkCQx&_nc_oc=AdqrLmHHpegtv18_moVWD1vW229lCNYpaWkcD1sYw-pn7sVuCV75_lRAuL1OIbvf3cU&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QEYoQkngQOn-yBSCQzqCo9fQ1pStjJDrPGF9Q7gt7PuZQ&oe=6A228CD5" alt="One UI 8.5 S25 Ultra">
+                    <div class="news-card-text">
+                        Samsung começa a liberar One UI 8.5 estável para Galaxy S25 Ultra
+                        <span class="news-card-date">6 de Maio, 07:59</span>
+                    </div>
+                </div>
+
                 <div class="news-card" onclick="abrirArtigo('paginaGalaxyA15A16')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/680696164_2030216201246607_2806909388885780373_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wYhj331zyb8Q7kNvwEj3awP&_nc_oc=AdoEeiONC6K2CHa3xv0gMvaO1SpSJ1bMgk5Rtst1G1re2NMo1uaIlo0LXN9Aon7wJuA&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFRqQvrL5Fk4ft8vbwX8EwH856Q98Hvw0HnyH4mCA9Rog&oe=6A2179BA" alt="Galaxy A15 e A16 One UI 8.5">
                     <div class="news-card-text">
@@ -266,6 +276,24 @@
         </div>
     </div>
 
+
+    <div class="article-overlay" id="paginaS25Ultra">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaS25Ultra')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/688132210_1684471755887904_331294413087139745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Fxd3dr2Mtr0Q7kNvwHBkCQx&_nc_oc=AdqrLmHHpegtv18_moVWD1vW229lCNYpaWkcD1sYw-pn7sVuCV75_lRAuL1OIbvf3cU&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QEYoQkngQOn-yBSCQzqCo9fQ1pStjJDrPGF9Q7gt7PuZQ&oe=6A228CD5" class="overlay-img">
+            <h1 class="overlay-title">Samsung começa a liberar One UI 8.5 estável para Galaxy S25 Ultra</h1>
+            <div class="overlay-text">
+                <p>A Samsung iniciou oficialmente a distribuição da One UI 8.5 estável, começando pela Coreia do Sul para a linha Galaxy S25, incluindo o Galaxy S25 Ultra.</p>
+                <p>A atualização marca o fim de um longo período de testes beta e já está sendo liberada para usuários no país.</p>
+                
+                <h2 class="overlay-subtitle">Lançamento começa pela Coreia do Sul</h2>
+                <p>Como de costume, a Samsung iniciou o rollout em seu país de origem. Outros mercados devem receber a atualização nos próximos dias ou semanas.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="article-overlay" id="paginaGalaxyA15A16">
         <button class="btn-voltar" onclick="fecharArtigo('paginaGalaxyA15A16')" aria-label="Voltar">
