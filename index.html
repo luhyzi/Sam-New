@@ -70,7 +70,6 @@
         }
         .article-overlay.active .overlay-content { opacity: 1; transform: translateY(0); filter: blur(0); -webkit-filter: blur(0); }
         
-        /* BOTÃO DE VOLTAR FIXO COM DESFOQUE */
         .btn-voltar { 
             position: fixed; top: 20px; left: 20px; z-index: 3000; 
             background-color: rgba(28, 28, 30, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -105,53 +104,62 @@
             display: flex; flex-direction: column;
         }
         .search-overlay-view.active { opacity: 1; visibility: visible; }
-
-        /* CONTAINER DOS RESULTADOS DA PESQUISA */
-        .search-results-container {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 130px; 
-            padding: 40px 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        /* ===== ESTILO DO ITEM DE PESQUISA (SÓ TEXTO) ===== */
-        .search-result-item {
-            width: 100%;
-            max-width: 800px;
-            padding: 20px 10px;
-            border-top: 1px solid rgba(0, 0, 0, 0.15); 
-            cursor: pointer;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #111111;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            animation: slideUp 0.3s ease forwards;
-        }
-
-        .search-result-item:hover {
-            opacity: 0.6;
-        }
-
+        .search-results-container { position: absolute; top: 0; left: 0; right: 0; bottom: 130px; padding: 40px 20px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+        .search-result-item { width: 100%; max-width: 800px; padding: 20px 10px; border-top: 1px solid rgba(0, 0, 0, 0.15); cursor: pointer; font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; font-weight: bold; color: #111111; transition: opacity 0.2s ease, transform 0.2s ease; animation: slideUp 0.3s ease forwards; }
+        .search-result-item:hover { opacity: 0.6; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .search-bottom-container { position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-
         .btn-close-search { width: 40px; height: 40px; border-radius: 50%; background: #e5e5ea; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: background 0.2s; align-self: flex-end; }
         .btn-close-search:hover { background: #d1d1d6; }
         .btn-close-search svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
         .search-input-wrapper { position: relative; width: 100%; max-width: 800px; background: #ffffff; border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .search-input { width: 100%; padding: 18px 60px 18px 55px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.1rem; border: 1px solid var(--border-color); border-radius: 40px; background: transparent; outline: none; color: #111; }
-        .search-input::placeholder { color: #999; font-weight: 500; }
         .search-icon-left { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #888; width: 20px; height: 20px; pointer-events: none; }
-
         .search-submit-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%) scale(0.8); width: 36px; height: 36px; border-radius: 50%; background: #007aff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #ffffff; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
         .search-submit-btn.show { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
         .search-submit-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ==================== NOVO: ESTILOS DO POP-UP DE NOTIFICAÇÃO ==================== */
+        .push-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 5000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .push-overlay.show { opacity: 1; visibility: visible; }
+        
+        .push-card {
+            background: #ffffff;
+            width: 90%; max-width: 340px;
+            border-radius: 24px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .push-overlay.show .push-card { transform: translateY(0) scale(1); }
+        
+        .push-icon {
+            width: 60px; height: 60px;
+            background: #f0f0f5; color: #007aff;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px auto;
+        }
+        .push-icon svg { width: 30px; height: 30px; fill: currentColor; }
+        
+        .push-title { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.3rem; font-weight: bold; color: #111; margin: 0 0 10px 0; }
+        .push-desc { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; color: #666; margin: 0 0 25px 0; line-height: 1.4; }
+        
+        .push-buttons { display: flex; flex-direction: column; gap: 10px; }
+        .push-btn-allow { background: #007aff; color: white; border: none; padding: 14px; border-radius: 14px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .push-btn-allow:hover { background: #005bb5; }
+        .push-btn-deny { background: transparent; color: #888; border: none; padding: 14px; border-radius: 14px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: color 0.2s; }
+        .push-btn-deny:hover { color: #333; }
 
         @media (max-width: 800px) {
             .news-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
@@ -246,30 +254,23 @@
         </main>
     </div>
 
-
     <div class="search-overlay-view" id="searchOverlay">
-        
         <div class="search-results-container" id="searchResultsArea"></div>
-
         <div class="search-bottom-container">
             <button class="btn-close-search" onclick="fecharPesquisa()" aria-label="Fechar Pesquisa">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
-
             <div class="search-input-wrapper">
                 <svg class="search-icon-left" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
                     <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-                
                 <input type="text" class="search-input" id="searchInput" placeholder="O que você procura?" oninput="realizarPesquisa()">
-                
                 <button class="search-submit-btn" id="searchSubmitBtn" aria-label="Pesquisar">
                     <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
                 </button>
             </div>
         </div>
     </div>
-
 
     <div class="bottom-nav-wrapper" id="navPill">
         <div class="bottom-nav">
@@ -284,19 +285,16 @@
         </div>
     </div>
 
-
     <div class="article-overlay" id="paginaLinhaA85">
         <button class="btn-voltar" onclick="fecharArtigo('paginaLinhaA85')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687986190_993533316449698_8136484247340759901_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=4yr1vRgBOq4Q7kNvwEi3v_8&_nc_oc=Ado1qYFhnhrH2tBU4-EC7YCIwi0kxnPU3EkgeGDklcQqqC9MMUzc7ctctdTcqSA0Rh0&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QGIW0hDow563cmAWgtbKujIkwoWHWEhBuK-Ffb3Mg3duQ&oe=6A25E6DD" class="overlay-img">
             <h1 class="overlay-title">Linha Galaxy A aparece em testes da One UI 8.5 nos servidores da Samsung</h1>
             <div class="overlay-text">
                 <p>Novos registros encontrados nos servidores internos da Samsung indicam que vários aparelhos da linha Galaxy A já estão sendo testados com a One UI 8.5.</p>
                 <p>A lista inclui modelos populares vendidos no Brasil, mostrando que a Samsung está expandindo os testes da nova atualização para celulares intermediários e básicos.</p>
-                
                 <h2 class="overlay-subtitle">Modelos vistos em testes</h2>
                 <p>
                     • Galaxy A56<br>
@@ -306,7 +304,6 @@
                     • Galaxy A07 4G<br>
                     • Galaxy A06 4G
                 </p>
-
                 <p>Além disso, versões brasileiras (ZTO) do Galaxy A56 também já apareceram em novos firmwares de teste da One UI 8.5.</p>
             </div>
         </div>
@@ -316,14 +313,12 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaS25Ultra')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/688132210_1684471755887904_331294413087139745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Fxd3dr2Mtr0Q7kNvwHBkCQx&_nc_oc=AdqrLmHHpegtv18_moVWD1vW229lCNYpaWkcD1sYw-pn7sVuCV75_lRAuL1OIbvf3cU&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QEYoQkngQOn-yBSCQzqCo9fQ1pStjJDrPGF9Q7gt7PuZQ&oe=6A228CD5" class="overlay-img">
             <h1 class="overlay-title">Samsung começa a liberar One UI 8.5 estável para Galaxy S25 Ultra</h1>
             <div class="overlay-text">
                 <p>A Samsung iniciou oficialmente a distribuição da One UI 8.5 estável, começando pela Coreia do Sul para a linha Galaxy S25, incluindo o Galaxy S25 Ultra.</p>
                 <p>A atualização marca o fim de um longo período de testes beta e já está sendo liberada para usuários no país.</p>
-                
                 <h2 class="overlay-subtitle">Lançamento começa pela Coreia do Sul</h2>
                 <p>Como de costume, a Samsung iniciou o rollout em seu país de origem. Outros mercados devem receber a atualização nos próximos dias ou semanas.</p>
             </div>
@@ -334,7 +329,6 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaGalaxyA15A16')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/680696164_2030216201246607_2806909388885780373_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wYhj331zyb8Q7kNvwEj3awP&_nc_oc=AdoEeiONC6K2CHa3xv0gMvaO1SpSJ1bMgk5Rtst1G1re2NMo1uaIlo0LXN9Aon7wJuA&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFRqQvrL5Fk4ft8vbwX8EwH856Q98Hvw0HnyH4mCA9Rog&oe=6A2179BA" class="overlay-img">
             <h1 class="overlay-title">Galaxy A15 5G e A16 5G aparecem em testes com One UI 8.5 nos servidores da Samsung</h1>
@@ -349,7 +343,6 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaRelogio')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687958985_1679969066355501_3143807549746778862_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2P7VHoPomKYQ7kNvwFjnvcH&_nc_oc=AdrTLJ2nRElHmn4ipj0OAOZbiwwcV7pVR6DlPN5VHVamxi_GuaF0llE_5-GfbtEPpq8&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QEJ7eeMPjNMSYWxFu7wZPr5wd1ZWW9tEPy6llxPBWm5kQ&oe=6A1F7ABD" class="overlay-img">
             <h1 class="overlay-title">One UI 9.0 vaza com novo relógio adaptativo mais inteligente</h1>
@@ -364,7 +357,6 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaPlayerNotificacao')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/683789131_1499934271805955_9163241896628485372_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=rYclc9dR4p8Q7kNvwFCM_uP&_nc_oc=AdpyTiYusmwSNXK1O7miBUCL0e980h4rPJU8Rk4OFOBGgnS5cLfOOSu1Vyr4mwHsKSI&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QHNdSzPLlpEhrUC9dw3DnhKuzKNLYvKLZ3ttCiHQXq6Aw&oe=6A1F6D51" class="overlay-img">
             <h1 class="overlay-title">One UI 9.0 vaza com novo player de música na área de notificações</h1>
@@ -380,7 +372,6 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaControle')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/684149357_967334385890788_5321776713522382321_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=S82SZcC1_owQ7kNvwEfQzzi&_nc_oc=Ado0f8SVHi0ISXYeMf2Xyzk7bHXJn3r88ESJsVniyTPf29XI27nu5-k0Gxe8Y0LiNg4&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QFmpQBSH1UmtukGHEVBuhJrPXk7EP8gXb_2YCMTUqJ8zg&oe=6A1F277B" class="overlay-img">
             <h1 class="overlay-title">One UI 9 pode permitir remover botão do modo escuro na central de controle</h1>
@@ -396,7 +387,6 @@
         <button class="btn-voltar" onclick="fecharArtigo('paginaPlayer')" aria-label="Voltar">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-
         <div class="overlay-content">
             <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/684485022_1652305236096240_561553661199524404_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=BlxMcopH9IEQ7kNvwEYPJXe&_nc_oc=AdqQ_Sk-c0DRE5XuOjFWmrTXRjxakD_N67UXoNm_ITLBzrESaEuvxgpWZgfUccDV--k&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QG6wXLxxyKyZdoSRpLQB-xahDEojuxHBB7Ue_bkbhDcyA&oe=6A1F1026" class="overlay-img">
             <h1 class="overlay-title">Vazamento da One UI 9.0 revela novo player de música</h1>
@@ -406,8 +396,22 @@
         </div>
     </div>
 
+    <div class="push-overlay" id="pushNotificationPopup">
+        <div class="push-card">
+            <div class="push-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            </div>
+            <h3 class="push-title">Fique por dentro!</h3>
+            <p class="push-desc">Ative as notificações para ser avisado sempre que a Samsung lançar uma novidade ou vazar alguma atualização.</p>
+            <div class="push-buttons">
+                <button class="push-btn-allow" onclick="pedirPermissaoNotificacao()">Ativar notificações</button>
+                <button class="push-btn-deny" onclick="fecharPushPopup()">Agora não</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // LÓGICA DE ABRIR/FECHAR MATÉRIAS
+        // LÓGICAS DA PÁGINA (MATÉRIAS E PESQUISA)
         function abrirArtigo(id) {
             document.getElementById(id).classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -421,7 +425,6 @@
             document.getElementById('navPill').classList.remove('hide'); 
         }
 
-        // LÓGICA DA TELA DE PESQUISA
         function abrirPesquisa() {
             document.getElementById('searchOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -433,27 +436,20 @@
             document.getElementById('searchOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
             document.getElementById('navPill').classList.remove('hide');
-            
             document.getElementById('searchInput').value = '';
             document.getElementById('searchSubmitBtn').classList.remove('show');
             document.getElementById('searchResultsArea').innerHTML = ''; 
         }
 
-        // LÓGICA DE PESQUISA AO VIVO
         function realizarPesquisa() {
-            const inputElement = document.getElementById('searchInput');
-            const query = inputElement.value.toLowerCase().trim();
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const btn = document.getElementById('searchSubmitBtn');
             const resultsContainer = document.getElementById('searchResultsArea');
             
-            if (query.length > 0) {
-                btn.classList.add('show');
-            } else {
-                btn.classList.remove('show');
-            }
+            if (query.length > 0) btn.classList.add('show');
+            else btn.classList.remove('show');
 
             resultsContainer.innerHTML = '';
-
             if (query === '') return;
 
             const cardsPrincipais = document.querySelectorAll('#listaNoticiasPrincipal .news-card');
@@ -461,7 +457,6 @@
 
             cardsPrincipais.forEach(card => {
                 const textContainer = card.querySelector('.news-card-text').cloneNode(true);
-                
                 const dateElement = textContainer.querySelector('.news-card-date');
                 if (dateElement) dateElement.remove();
                 
@@ -469,14 +464,11 @@
                 
                 if (tituloLimpo.toLowerCase().includes(query)) {
                     encontrouAlgo = true;
-                    
                     const idNoticia = card.getAttribute('onclick').match(/'([^']+)'/)[1];
-                    
                     const resultItem = document.createElement('div');
                     resultItem.className = 'search-result-item';
                     resultItem.setAttribute('onclick', `abrirDaPesquisa('${idNoticia}')`);
                     resultItem.innerText = tituloLimpo;
-                    
                     resultsContainer.appendChild(resultItem);
                 }
             });
@@ -488,10 +480,48 @@
 
         function abrirDaPesquisa(idNoticia) {
             fecharPesquisa();
-            setTimeout(() => {
-                abrirArtigo(idNoticia);
-            }, 300);
+            setTimeout(() => { abrirArtigo(idNoticia); }, 300);
         }
+
+        // ==================== LÓGICA DO POP-UP DE NOTIFICAÇÕES ====================
+        
+        // Verifica se o navegador suporta notificações
+        function verificarNotificacoes() {
+            if (!("Notification" in window)) {
+                console.log("Este navegador não suporta notificações.");
+                return;
+            }
+            
+            // Se o usuário ainda não escolheu sim ou não, mostra o pop-up após 3 segundos
+            if (Notification.permission === "default") {
+                setTimeout(() => {
+                    document.getElementById('pushNotificationPopup').classList.add('show');
+                }, 3000);
+            }
+        }
+
+        function fecharPushPopup() {
+            document.getElementById('pushNotificationPopup').classList.remove('show');
+        }
+
+        function pedirPermissaoNotificacao() {
+            fecharPushPopup(); // Esconde o pop-up visual
+            
+            // Pede a permissão real do sistema do usuário
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    // Se ele aceitou, envia uma notificação de teste na mesma hora!
+                    new Notification("Sam New", {
+                        body: "Tudo certo! Você será avisado quando tivermos novidades da Samsung.",
+                        icon: "https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/688132210_1684471755887904_331294413087139745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Fxd3dr2Mtr0Q7kNvwHBkCQx&_nc_oc=AdqrLmHHpegtv18_moVWD1vW229lCNYpaWkcD1sYw-pn7sVuCV75_lRAuL1OIbvf3cU&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QEYoQkngQOn-yBSCQzqCo9fQ1pStjJDrPGF9Q7gt7PuZQ&oe=6A228CD5" // Usa a foto do S25 Ultra como ícone de teste
+                    });
+                }
+            });
+        }
+
+        // Inicia a verificação de notificações assim que a página carrega
+        window.onload = verificarNotificacoes;
+        
     </script>
 </body>
 </html>
