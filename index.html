@@ -187,6 +187,14 @@
 
             <aside class="side-news" id="listaNoticiasPrincipal">
                 
+                <div class="news-card" onclick="abrirArtigo('paginaLinhaA85')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687986190_993533316449698_8136484247340759901_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=4yr1vRgBOq4Q7kNvwEi3v_8&_nc_oc=Ado1qYFhnhrH2tBU4-EC7YCIwi0kxnPU3EkgeGDklcQqqC9MMUzc7ctctdTcqSA0Rh0&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QGIW0hDow563cmAWgtbKujIkwoWHWEhBuK-Ffb3Mg3duQ&oe=6A25E6DD" alt="Linha Galaxy A One UI 8.5">
+                    <div class="news-card-text">
+                        Linha Galaxy A aparece em testes da One UI 8.5 nos servidores da Samsung
+                        <span class="news-card-date">8 de Maio, 21:07</span>
+                    </div>
+                </div>
+
                 <div class="news-card" onclick="abrirArtigo('paginaS25Ultra')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/688132210_1684471755887904_331294413087139745_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=Fxd3dr2Mtr0Q7kNvwHBkCQx&_nc_oc=AdqrLmHHpegtv18_moVWD1vW229lCNYpaWkcD1sYw-pn7sVuCV75_lRAuL1OIbvf3cU&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QEYoQkngQOn-yBSCQzqCo9fQ1pStjJDrPGF9Q7gt7PuZQ&oe=6A228CD5" alt="One UI 8.5 S25 Ultra">
                     <div class="news-card-text">
@@ -276,6 +284,33 @@
         </div>
     </div>
 
+
+    <div class="article-overlay" id="paginaLinhaA85">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaLinhaA85')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/687986190_993533316449698_8136484247340759901_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=9f807c&_nc_ohc=4yr1vRgBOq4Q7kNvwEi3v_8&_nc_oc=Ado1qYFhnhrH2tBU4-EC7YCIwi0kxnPU3EkgeGDklcQqqC9MMUzc7ctctdTcqSA0Rh0&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QGIW0hDow563cmAWgtbKujIkwoWHWEhBuK-Ffb3Mg3duQ&oe=6A25E6DD" class="overlay-img">
+            <h1 class="overlay-title">Linha Galaxy A aparece em testes da One UI 8.5 nos servidores da Samsung</h1>
+            <div class="overlay-text">
+                <p>Novos registros encontrados nos servidores internos da Samsung indicam que vários aparelhos da linha Galaxy A já estão sendo testados com a One UI 8.5.</p>
+                <p>A lista inclui modelos populares vendidos no Brasil, mostrando que a Samsung está expandindo os testes da nova atualização para celulares intermediários e básicos.</p>
+                
+                <h2 class="overlay-subtitle">Modelos vistos em testes</h2>
+                <p>
+                    • Galaxy A56<br>
+                    • Galaxy A17 4G<br>
+                    • Galaxy A16 4G<br>
+                    • Galaxy A15 4G/5G<br>
+                    • Galaxy A07 4G<br>
+                    • Galaxy A06 4G
+                </p>
+
+                <p>Além disso, versões brasileiras (ZTO) do Galaxy A56 também já apareceram em novos firmwares de teste da One UI 8.5.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="article-overlay" id="paginaS25Ultra">
         <button class="btn-voltar" onclick="fecharArtigo('paginaS25Ultra')" aria-label="Voltar">
@@ -404,7 +439,7 @@
             document.getElementById('searchResultsArea').innerHTML = ''; 
         }
 
-        // LÓGICA DE PESQUISA AO VIVO (APENAS TEXTO COM LINHA)
+        // LÓGICA DE PESQUISA AO VIVO
         function realizarPesquisa() {
             const inputElement = document.getElementById('searchInput');
             const query = inputElement.value.toLowerCase().trim();
