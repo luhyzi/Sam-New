@@ -48,7 +48,7 @@
         .featured-article p { font-size: 1.2rem; color: #333; margin: 0; }
         .side-news { border-left: 1px solid var(--border-color); padding-left: 40px; }
         
-        .view-section { padding-bottom: 130px; animation: fadeIn 0.4s ease forwards; }
+        .view-section { padding-bottom: 40px; animation: fadeIn 0.4s ease forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ----- CARTÃO DE NOTÍCIA ----- */
@@ -120,7 +120,7 @@
         .search-submit-btn.show { opacity: 1; pointer-events: auto; transform: translateY(-50%) scale(1); }
         .search-submit-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-        /* ==================== NOVO: ESTILOS DO POP-UP DE NOTIFICAÇÃO ==================== */
+        /* ----- ESTILOS DO POP-UP DE NOTIFICAÇÃO ----- */
         .push-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.4);
@@ -160,6 +160,18 @@
         .push-btn-allow:hover { background: #005bb5; }
         .push-btn-deny { background: transparent; color: #888; border: none; padding: 14px; border-radius: 14px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: color 0.2s; }
         .push-btn-deny:hover { color: #333; }
+
+        /* ----- FOOTER ----- */
+        .site-footer {
+            text-align: center;
+            padding: 40px 20px 120px 20px; /* 120px para não ficar atrás da barra de pesquisa */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .site-footer p { margin: 5px 0; }
+        .site-footer a { color: #007aff; text-decoration: none; font-weight: bold; }
+        .site-footer a:hover { text-decoration: underline; }
 
         @media (max-width: 800px) {
             .news-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
@@ -252,6 +264,12 @@
                 </div>
             </aside>
         </main>
+
+        <footer class="site-footer">
+            <p>Desenvolvedor: Luiz</p>
+            <p><a href="https://t.me/samsungapksnew" target="_blank">Telegram</a></p>
+        </footer>
+
     </div>
 
     <div class="search-overlay-view" id="searchOverlay">
