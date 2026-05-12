@@ -164,7 +164,7 @@
         /* ----- FOOTER ----- */
         .site-footer {
             text-align: center;
-            padding: 40px 20px 120px 20px; /* 120px para não ficar atrás da barra de pesquisa */
+            padding: 40px 20px 120px 20px; 
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #888;
             font-size: 0.9rem;
@@ -206,6 +206,14 @@
             </section>
 
             <aside class="side-news" id="listaNoticiasPrincipal">
+
+                <div class="news-card" onclick="abrirArtigo('paginaS25Brasil85')">
+                    <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/591519955_2162304404299300_3420348889046942444_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wtKcLg_AFJIQ7kNvwEvWkVI&_nc_oc=AdoI674hKsyrdSiMI0NzlhlE9l_WC39QlZ-V2jmf8AY1sh4HtvHfMaXrdm2FxgucSGg&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFP95r_w7WDEOiQjS7XyuZ6a_XrvsC0bXM2lY4QwzKAzg&oe=6A2A0796" alt="One UI 8.5 Brasil Galaxy S25">
+                    <div class="news-card-text">
+                        Samsung conclui liberação da One UI 8.5 no Brasil para toda a linha Galaxy S25
+                        <span class="news-card-date">12 de Maio, 01:00</span>
+                    </div>
+                </div>
 
                 <div class="news-card" onclick="abrirArtigo('paginaGeminiUI')">
                     <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/683837604_1488821122847088_6673431558435108556_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_ohc=HewSvBmKiDAQ7kNvwEiImYP&_nc_oc=AdoRulc3rvV2ydsTEhsu-9CJqBueZXZgNobl41767RNj-2MPZ0fd4yL6Ek1fLJ0_AHo&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7baaf&oh=03_Q7cD5QGEhYlL4RSqdWRyCcU8gGRbfERq9JVeRVH2s9j3lDgjsw&oe=6A26098D" alt="Gemini nova interface">
@@ -308,6 +316,28 @@
                 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 Pesquisa
             </button>
+        </div>
+    </div>
+
+    <div class="article-overlay" id="paginaS25Brasil85">
+        <button class="btn-voltar" onclick="fecharArtigo('paginaS25Brasil85')" aria-label="Voltar">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="overlay-content">
+            <img src="https://scontent.fmab1-1.fna.fbcdn.net/v/t1.15752-9/591519955_2162304404299300_3420348889046942444_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_ohc=wtKcLg_AFJIQ7kNvwEvWkVI&_nc_oc=AdoI674hKsyrdSiMI0NzlhlE9l_WC39QlZ-V2jmf8AY1sh4HtvHfMaXrdm2FxgucSGg&_nc_zt=23&_nc_ht=scontent.fmab1-1.fna&_nc_ss=7b6a8&oh=03_Q7cD5QFP95r_w7WDEOiQjS7XyuZ6a_XrvsC0bXM2lY4QwzKAzg&oe=6A2A0796" class="overlay-img">
+            <h1 class="overlay-title">Samsung conclui liberação da One UI 8.5 no Brasil para toda a linha Galaxy S25</h1>
+            <div class="overlay-text">
+                <p>A Samsung finalizou a distribuição da One UI 8.5 no Brasil para todos os modelos da linha Galaxy S25.</p>
+                <p>A atualização já está disponível para:</p>
+                <p>
+                    • Galaxy S25<br>
+                    • Galaxy S25+<br>
+                    • Galaxy S25 Ultra<br>
+                    • Galaxy S25 FE<br>
+                    • Galaxy S25 Edge
+                </p>
+                <p>A nova versão baseada no Android 16 começou a ser liberada inicialmente na Coreia do Sul e agora já alcançou completamente o mercado brasileiro.</p>
+            </div>
         </div>
     </div>
 
